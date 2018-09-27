@@ -68,6 +68,36 @@ button.addEventListener ("click", function(event1){
 
         div.remove()
     })
+
     input.value = ""
 
+    /* DRAG DROP */
+    div.onmousedown = function (event) {
+        div.style.position = 'absolute';
+        div.style.zIndex = 1000;
+
+        moveAt(event.pageY);
+
+    function moveAt(pageY) {
+    div.style.top = pageY - div.offsetHeight / 2 + 'px';
+    }
+    function onMouseMove(event) {
+        moveAt(event.pageY);
+      }
+    document.addEventListener('mousemove', onMouseMove);
+
+    div.onmouseup = function () {
+        document.removeEventListener('mousemove', onMouseMove);
+        div.onmouseup = null;
+      };
+    
+    };
+    
+    div.ondragstart = function () {
+      return false;
+     }
+
+
 })
+
+
